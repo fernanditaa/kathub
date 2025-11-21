@@ -4,18 +4,26 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.kathub.kathub.model.MetodoPago;
 import com.example.kathub.kathub.model.Pedido;
 import com.example.kathub.kathub.model.Producto;
 import com.example.kathub.kathub.model.Usuario;
+import com.example.kathub.kathub.model.Ventas;
+import com.example.kathub.kathub.repository.MetodoPagoRepository;
+import com.example.kathub.kathub.repository.PedidoRepository;
 import com.example.kathub.kathub.repository.ProductoRepository;
 import com.example.kathub.kathub.repository.UsuarioRepository;
-import com.example.kathub.kathub.repository.PedidoRepository;
+import com.example.kathub.kathub.repository.VentaRepository;
 
 @Configuration
 public class CargarDatos {
 
     @Bean
-    CommandLineRunner initDatabase(UsuarioRepository usuarioRepository, ProductoRepository productoRepository, PedidoRepository pedidoRepository) {
+    CommandLineRunner initDatabase(UsuarioRepository usuarioRepository,
+                                    ProductoRepository productoRepository,
+                                    PedidoRepository pedidoRepository,
+                                    VentaRepository ventaRepository,
+                                    MetodoPagoRepository metodoPagoRepository) {
         return args -> {
             
             Usuario u = new Usuario();
@@ -31,7 +39,7 @@ public class CargarDatos {
 
             Producto p = new Producto();
             p.setNombre("Chopper");
-            p.setDescripcion("Amigurimio tejido de algodón");
+            p.setDescripcion("Amigurimi tejido de algodón");
             p.setPrecio(19.99);
             p.setStock(5);
 
@@ -47,6 +55,21 @@ public class CargarDatos {
 
             pedidoRepository.save(compra);
             System.out.println("Pedido guardado: " + compra.getId());
+
+            MetodoPago mp = new MetodoPago();
+            mp.setNombre("Tarjeta de Crédito");
+            metodoPagoRepository.save(mp);
+
+            Ventas venta = new Ventas();
+            venta.setUsuario(u);
+            venta.setMetodoPago(mp);
+            venta.setTotal(19.99);
+            venta.setFecha(java.time.LocalDate.now());
+            venta.setEstado("COMPLETADO");
+            venta.setProducto(p);
+            ventaRepository.save(venta);
+            System.out.println("Venta guardada: " + venta.getId());
+
         };
     }
     

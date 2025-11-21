@@ -13,26 +13,31 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "pedidos")
-public class Pedido {
+@Table(name = "ventas")
+public class Ventas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate fecha; //fecha de compra
-    private String estado; //estado del pedido
-
+    private LocalDate fecha;
+    private String estado;
+    private Double total;
+    
+    
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private Usuario usuario; //usuario que hizo el pedido
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    private Producto producto; //producto comprado
+    private Producto producto;
 
     @ManyToOne
     @JoinColumn(name = "metodo_pago_id")
-    private MetodoPago metodoPago; //metodo de pago utilizado
-    
+    private MetodoPago metodoPago;
+
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
+    }
 }

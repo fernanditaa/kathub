@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.kathub.kathub.model.Pedido;
+import com.example.kathub.kathub.model.Ventas;
 
 @Repository
-public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-
-    List<Pedido> findByUsuarioId(Long usuarioId);
-
+public interface  VentaRepository extends JpaRepository<Ventas, Long> {
+    List<Ventas> findByUsuarioId(Long usuario);
+    
 }
