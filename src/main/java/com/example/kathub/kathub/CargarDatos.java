@@ -12,14 +12,14 @@ import com.example.kathub.kathub.model.Ventas;
 import com.example.kathub.kathub.repository.MetodoPagoRepository;
 import com.example.kathub.kathub.repository.PedidoRepository;
 import com.example.kathub.kathub.repository.ProductoRepository;
-import com.example.kathub.kathub.repository.UsuarioRepository;
 import com.example.kathub.kathub.repository.VentaRepository;
+import com.example.kathub.kathub.service.UsuarioService;
 
 @Configuration
 public class CargarDatos {
 
     @Bean
-    CommandLineRunner initDatabase(UsuarioRepository usuarioRepository,
+    CommandLineRunner initDatabase(UsuarioService usuarioRepository,
                                     ProductoRepository productoRepository,
                                     PedidoRepository pedidoRepository,
                                     VentaRepository ventaRepository,

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.kathub.kathub._exception.RecursoNoEncontradoException;
 import com.example.kathub.kathub.model.Usuario;
-import com.example.kathub.kathub.repository.UsuarioRepository;
+import com.example.kathub.kathub.service.UsuarioService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -31,9 +31,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class UsuarioControllerV2 {
 
     @Autowired
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioRepository;
 
-    public UsuarioControllerV2(UsuarioRepository usuarioRepository){
+    public UsuarioControllerV2(UsuarioService usuarioRepository){
         this.usuarioRepository = usuarioRepository;
     }
     @ApiResponses({
