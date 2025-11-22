@@ -25,6 +25,11 @@ public class CargarDatos {
                                     VentaRepository ventaRepository,
                                     MetodoPagoRepository metodoPagoRepository) {
         return args -> {
+
+            if(usuarioRepository.count() > 0) {
+                System.out.println("Datos ya cargados, no se realizará ninguna acción.");
+                return;
+            }
             
             Usuario u = new Usuario();
             u.setNombre("Fernanda");
