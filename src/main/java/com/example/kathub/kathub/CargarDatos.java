@@ -28,21 +28,26 @@ public class CargarDatos {
         return args -> {
 
            
-                System.out.println("Iniciando carga de datos inicial...");
+            System.out.println("Iniciando carga de datos inicial...");
                
+            if (productoRepository.count() > 0){
+                System.out.println("Datos ya cargados");
+                return;
+            }
+
             Usuario u = usuarioService.findByEmail("kathub@gmail.com");
             
             if (u == null) {
                 u = new Usuario();
-            u.setNombre("Kat");
-            u.setApellido("Hub");
-            u.setTelefono("930357394");
-            u.setDireccion("calle 1");
-            u.setEmail("kathub@gmail.com");
-            u.setContrasena("123456789");
+                u.setNombre("Kat");
+                u.setApellido("Hub");
+                u.setTelefono("930357394");
+                u.setDireccion("calle 1");
+                u.setEmail("kathub@gmail.com");
+                u.setContrasena("123456789");
 
-            usuarioService.save(u);
-            System.out.println("Usuario guardado: " + u.getNombre());
+                usuarioService.save(u);
+                System.out.println("Usuario guardado: " + u.getNombre());
             } else {
                 System.out.println("Usuario ya existe: " + u.getEmail());
             }
@@ -71,14 +76,8 @@ public class CargarDatos {
                 new Producto("Gorro turbante", "Turbante gris con brillos y flor", "Talla bebé", 10000.0, 8, "Gorro")
             );
 
-            for (Producto prod : productos) {
-                if (!productoRepository.existsByNombre(prod.getNombre())) {
-                    productoRepository.save(prod);
-                    System.out.println("Producto creado: " + prod.getNombre());
-                } else {
-                    System.out.println("Producto ya existe: " + prod.getNombre());
-                }
-            }
+            productos.forEach(productoRepository::save);
+            System.out.println("Productos cargados" + productos.size());
 
             MetodoPago mp = new MetodoPago();
             mp.setNombre("Tarjeta de Crédito");
