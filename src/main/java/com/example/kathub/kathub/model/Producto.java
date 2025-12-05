@@ -17,10 +17,23 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String email;
     private String descripcion;
+    private String medida;
     private Double precio;
     private Integer stock;
+    private String categoria;
     private String imagenUrl;
+
+    public Producto(){
+    }
+
+    public Producto(String nombre, String descripcion, String medida, Double precio, Integer stock, String categoria){
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.medida = medida;
+        this.precio = precio;
+        this.stock = stock;
+        this.categoria = categoria;
+    }
     
 }
