@@ -11,8 +11,8 @@ public class StaticResourceConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry){
 
         registry.addResourceHandler("/images/**")
-        .addResourceLocations("classpath:/static/images/")
-        .setCachePeriod(3600);
+                .addResourceLocations("classpath:/static/images/")
+                .setCachePeriod(3600);
     }
     
 }

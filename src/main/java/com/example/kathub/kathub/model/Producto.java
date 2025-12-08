@@ -27,13 +27,14 @@ public class Producto {
     public Producto(){
     }
 
-    public Producto(String nombre, String descripcion, String medida, Double precio, Integer stock, String categoria){
+    public Producto(String nombre, String descripcion, String medida, Double precio, Integer stock, String categoria, String imagenUrl){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.medida = medida;
         this.precio = precio;
         this.stock = stock;
         this.categoria = categoria;
+        this.imagenUrl = imagenUrl;
     }
     
 }

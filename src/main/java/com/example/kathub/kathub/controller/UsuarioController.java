@@ -43,6 +43,12 @@ public class UsuarioController {
         if(usuarioService.existsByEmail(usuario.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El correo ya está en uso");
         }
+
+        if (!usuarioService.existAdmin()) {
+        usuario.setRol("admin");
+        } else {
+            usuario.setRol("user");
+        }
         Usuario nuevoUsuario = usuarioService.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevoUsuario);
     }
@@ -58,8 +64,23 @@ public class UsuarioController {
         if (usuario == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(new LoginResponse(usuario));
     }
+
+            public static class LoginResponse {
+            public Long id;
+            public String nombre;
+            public String email;
+            public String rol;
+
+            public LoginResponse(Usuario u) {
+                this.id = u.getId();
+                this.nombre = u.getNombre();
+                this.email = u.getEmail();
+                this.rol = u.getRol();
+            }
+        }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioDetalles) {
@@ -90,6 +111,7 @@ public class UsuarioController {
                 })
                 .orElse(ResponseEntity.notFound().build());
         }
+
 
         @DeleteMapping("/{id}")
         public ResponseEntity<?> eliminarUsuario(@PathVariable Long id) {

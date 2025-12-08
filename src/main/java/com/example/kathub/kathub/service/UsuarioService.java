@@ -53,4 +53,7 @@ public class UsuarioService {
     public long count() {
         return usuarioRepository.count();
     }
+    public boolean existAdmin(){
+        return usuarioRepository.existsByRol("admin");
+    }
 }

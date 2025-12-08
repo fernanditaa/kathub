@@ -27,4 +27,7 @@ public class Usuario  {
     @Column(nullable = false)// para que no sea nulo
     private String contrasena;
 
+    @Column(nullable=false)
+    private String rol = "user";
+
 }
