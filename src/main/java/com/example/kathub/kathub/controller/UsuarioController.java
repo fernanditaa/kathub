@@ -111,6 +111,18 @@ public class UsuarioController {
                 })
                 .orElse(ResponseEntity.notFound().build());
         }
+        @PatchMapping("/make-admin/{id}")
+        public ResponseEntity<?> makeAdmin(@PathVariable Long id) {
+
+            return usuarioService.findById(id)
+                    .map(usuario -> {
+                        usuario.setRol("admin");
+                        usuarioService.save(usuario);
+                        return ResponseEntity.ok("Usuario ahora es ADMIN");
+                    })
+                    .orElse(ResponseEntity.notFound().build());
+        }
+
 
 
         @DeleteMapping("/{id}")
