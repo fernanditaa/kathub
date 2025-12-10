@@ -27,7 +27,7 @@ public class CargarDatos {
            
             System.out.println("Iniciando carga de datos inicial...");
                
-            if (productoRepository.existsByNombre("TurboAbuela")){
+            if (productoRepository.count() > 0){
                 System.out.println("Datos ya cargados");
                 return;
             }
