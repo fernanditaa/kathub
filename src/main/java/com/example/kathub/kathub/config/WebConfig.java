@@ -15,6 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                                 "http://localhost:5173",
                                 "http://localhost:3000",
                                 "https://kathub.onrender.com"
+                                "https://full-stack-evaluacion3.vercel.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
